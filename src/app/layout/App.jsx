@@ -1,10 +1,11 @@
 import { Container } from 'semantic-ui-react';
 import EventDashboard from '../../features/events/eventDashboard/EventDashboard';
+import NavBar from '../../features/nav/NavBar';
 
 export default function App() {
   return (
     <>
-      <h1>SocialEvents</h1>
+      <NavBar />
       <Container className='main'>
         <EventDashboard />
       </Container>
