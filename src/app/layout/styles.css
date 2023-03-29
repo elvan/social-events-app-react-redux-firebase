@@ -14,3 +14,19 @@ body {
 .ui.main.container {
   margin-top: 7em;
 }
+
+.masthead {
+  display: flex;
+  align-items: center;
+  background-image: linear-gradient(
+    135deg,
+    rgb(35, 23, 119) 0%,
+    rgb(135, 35, 179) 69%,
+    rgb(167, 35, 179) 89%
+  ) !important;
+  height: 100vh;
+}
+
+.masthead h1.ui.header {
+  font-size: 4em;
+}
