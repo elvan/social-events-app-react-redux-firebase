@@ -1,6 +1,20 @@
 export const INCREMENT_COUNTER = 'INCREMENT_COUNTER';
 export const DECREMENT_COUNTER = 'DECREMENT_COUNTER';
 
+export function increment(amount) {
+  return {
+    type: INCREMENT_COUNTER,
+    payload: amount,
+  };
+}
+
+export function decrement(amount) {
+  return {
+    type: DECREMENT_COUNTER,
+    payload: amount,
+  };
+}
+
 const initialState = {
   data: 42,
 };
