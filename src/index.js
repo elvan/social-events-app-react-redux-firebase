@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import 'semantic-ui-css/semantic.min.css';
 import App from './app/layout/App';
+import ScrollToTop from './app/layout/ScrollToTop';
 import './app/layout/styles.css';
 import { configureStore } from './app/store/configureStore';
 
@@ -14,6 +15,7 @@ function render() {
   ReactDOM.render(
     <Provider store={store}>
       <BrowserRouter>
+        <ScrollToTop />
         <App />
       </BrowserRouter>
     </Provider>,
