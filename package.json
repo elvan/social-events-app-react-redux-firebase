@@ -1,6 +1,6 @@
 {
   "name": "social-events",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "build": "react-scripts build",
@@ -33,9 +33,11 @@
     "cuid": "^3.0.0",
     "date-fns": "^2.29.3",
     "formik": "^2.2.9",
+    "google-map-react": "^1.1.7",
     "react": "^16.14.0",
     "react-datepicker": "^3.8.0",
     "react-dom": "^16.14.0",
+    "react-places-autocomplete": "^7.3.0",
     "react-redux": "^7.2.9",
     "react-router-dom": "^5.3.4",
     "react-scripts": "^5.0.1",
