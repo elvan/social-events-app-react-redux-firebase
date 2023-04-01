@@ -1,4 +1,5 @@
 import firebase from '../config/firebase';
+import { setUserProfileData } from './firestoreService';
 
 export function signInWithEmail(creds) {
   return firebase
@@ -18,6 +19,7 @@ export async function registerInFirebase(creds) {
     await result.user.updateProfile({
       displayName: creds.displayName,
     });
+    return await setUserProfileData(result.user);
   } catch (error) {
     throw error;
   }
