@@ -1,4 +1,5 @@
 import { Route, useLocation } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import { Container } from 'semantic-ui-react';
 import EventDashboard from '../../features/events/eventDashboard/EventDashboard';
 import EventDetailedPage from '../../features/events/eventDetailed/EventDetailedPage';
@@ -14,6 +15,7 @@ export default function App() {
   return (
     <>
       <ModalManager />
+      <ToastContainer position='bottom-right' hideProgressBar />
       <Route exact path='/' component={HomePage} />
       <Route
         path={'/(.+)'}
