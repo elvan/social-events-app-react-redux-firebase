@@ -1,9 +1,9 @@
 import { SIGN_IN_USER, SIGN_OUT_USER } from './authConstants';
 
-export function signInUser(payload) {
+export function signInUser(user) {
   return {
     type: SIGN_IN_USER,
-    payload,
+    payload: user,
   };
 }
 
