@@ -249,3 +249,11 @@ export async function unfollowUser(profile) {
     throw error;
   }
 }
+
+export function getFollowersCollection(profileId) {
+  return db.collection('following').doc(profileId).collection('userFollowers');
+}
+
+export function getFollowingCollection(profileId) {
+  return db.collection('following').doc(profileId).collection('userFollowing');
+}
