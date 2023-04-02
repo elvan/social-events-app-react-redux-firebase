@@ -20,6 +20,10 @@ export default function EventDetailedChat({ eventId }) {
     commentId: null,
   });
 
+  function handleCloseReplyForm() {
+    setShowReplyForm({ open: false, commentId: null });
+  }
+
   useEffect(() => {
     getEventChatRef(eventId).on('value', (snapshot) => {
       if (!snapshot.exists()) return;
@@ -70,6 +74,23 @@ export default function EventDetailedChat({ eventId }) {
                     </span>
                   ))}
                 </Comment.Text>
+                <Comment.Actions>
+                  <Comment.Action
+                    onClick={() =>
+                      setShowReplyForm({ open: true, commentId: comment.id })
+                    }
+                  >
+                    Reply
+                  </Comment.Action>
+                  {showReplyForm.open &&
+                    showReplyForm.commentId === comment.id && (
+                      <EventDetailedChatForm
+                        eventId={eventId}
+                        parentId={comment.id}
+                        closeForm={handleCloseReplyForm}
+                      />
+                    )}
+                </Comment.Actions>
               </Comment.Content>
             </Comment>
           ))}
