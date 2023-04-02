@@ -3,7 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { Button, Card, Grid, Header, Image, Tab } from 'semantic-ui-react';
 import PhotoUploadWidget from '../../../app/common/photos/PhotoUploadWidget';
+import { deleteFromFirebaseStorage } from '../../../app/firestore/firebaseService';
 import {
+  deletePhotoFromCollection,
   getUserPhotos,
   setMainPhoto,
 } from '../../../app/firestore/firestoreService';
@@ -32,6 +34,18 @@ export default function PhotosTab({ profile, isCurrentUser }) {
       toast.error(error.message);
     } finally {
       setUpdating({ isUpdating: false, target: null });
+    }
+  }
+
+  async function handleDeletePhoto(photo, target) {
+    setDeleting({ isDeleting: true, target });
+    try {
+      await deleteFromFirebaseStorage(photo.name);
+      await deletePhotoFromCollection(photo.id);
+    } catch (error) {
+      toast.error(error.message);
+    } finally {
+      setDeleting({ isDeleting: false, target: null });
     }
   }
 
@@ -71,6 +85,7 @@ export default function PhotosTab({ profile, isCurrentUser }) {
                     />
                     <Button
                       name={photo.id}
+                      onClick={(e) => handleDeletePhoto(photo, e.target.name)}
                       loading={
                         deleting.isDeleting && deleting.target === photo.id
                       }
