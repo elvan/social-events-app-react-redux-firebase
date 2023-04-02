@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { Button, Grid, Header } from 'semantic-ui-react';
+import PhotoWidgetCropper from './PhotoWidgetCropper';
 import PhotoWidgetDropzone from './PhotoWidgetDropzone';
 
 export default function PhotoUploadWidget({ setEditMode }) {
   const [files, setFiles] = useState([]);
+  const [image, setImage] = useState(null);
 
   return (
     <Grid>
@@ -14,7 +16,12 @@ export default function PhotoUploadWidget({ setEditMode }) {
       <Grid.Column width={1} />
       <Grid.Column width={4}>
         <Header color='teal' sub content='Step 2 - Resize' />
-        PhotoWidgetCropper
+        {files.length > 0 && (
+          <PhotoWidgetCropper
+            setImage={setImage}
+            imagePreview={files[0].preview}
+          />
+        )}
       </Grid.Column>
       <Grid.Column width={1} />
       <Grid.Column width={4}>
