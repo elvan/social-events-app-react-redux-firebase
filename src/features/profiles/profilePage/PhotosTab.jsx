@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 import { Button, Card, Grid, Header, Image, Tab } from 'semantic-ui-react';
 import PhotoUploadWidget from '../../../app/common/photos/PhotoUploadWidget';
-import { getUserPhotos } from '../../../app/firestore/firestoreService';
+import {
+  getUserPhotos,
+  setMainPhoto,
+} from '../../../app/firestore/firestoreService';
 import useFirestoreColection from '../../../app/hooks/useFirestoreCollection';
 import { listenToUserPhotos } from '../profileActions';
 
@@ -19,6 +23,17 @@ export default function PhotosTab({ profile, isCurrentUser }) {
     data: (photos) => dispatch(listenToUserPhotos(photos)),
     deps: [profile.id, dispatch],
   });
+
+  async function handleSetMainPhoto(photo, target) {
+    setUpdating({ isUpdating: true, target });
+    try {
+      await setMainPhoto(photo);
+    } catch (error) {
+      toast.error(error.message);
+    } finally {
+      setUpdating({ isUpdating: false, target: null });
+    }
+  }
 
   return (
     <Tab.Pane loading={loading}>
@@ -48,6 +63,7 @@ export default function PhotosTab({ profile, isCurrentUser }) {
                       loading={
                         updating.isUpdating && updating.target === photo.id
                       }
+                      onClick={(e) => handleSetMainPhoto(photo, e.target.name)}
                       disabled={photo.url === profile.photoURL}
                       basic
                       color='green'
