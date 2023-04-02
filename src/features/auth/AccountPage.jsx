@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { Button, Header, Label, Segment } from 'semantic-ui-react';
 import * as Yup from 'yup';
 import MyTextInput from '../../app/common/form/MyTextInput';
+import { updateUserPassword } from '../../app/firestore/firebaseService';
 
 export default function AccountPage() {
   const { currentUser } = useSelector((state) => state.auth);
@@ -24,6 +25,15 @@ export default function AccountPage() {
                 'Passwords do not match'
               ),
             })}
+            onSubmit={async (values, { setSubmitting, setErrors }) => {
+              try {
+                await updateUserPassword(values);
+              } catch (error) {
+                setErrors({ auth: error.message });
+              } finally {
+                setSubmitting(false);
+              }
+            }}
           >
             {({ errors, isSubmitting, isValid, dirty }) => (
               <Form className='ui form'>
@@ -75,12 +85,12 @@ export default function AccountPage() {
       {currentUser.providerId === 'google.com' && (
         <>
           <Header color='teal' sub content='Google account' />
-          <p>Please visit Facebook to update your account</p>
+          <p>Please visit Google to update your account</p>
           <Button
             icon='google'
             color='google plus'
             as={Link}
-            to='https://facebook.com'
+            to='https://google.com'
             content='Go to Google'
           />
         </>
