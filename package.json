@@ -39,6 +39,7 @@
     "react-calendar": "^3.9.0",
     "react-datepicker": "^3.8.0",
     "react-dom": "^16.14.0",
+    "react-dropzone": "^11.7.1",
     "react-places-autocomplete": "^7.3.0",
     "react-redux": "^7.2.9",
     "react-router-dom": "^5.3.4",

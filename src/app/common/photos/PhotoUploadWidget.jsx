@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Grid, Header } from 'semantic-ui-react';
+import PhotoWidgetDropzone from './PhotoWidgetDropzone';
 
 export default function PhotoUploadWidget({ setEditMode }) {
   const [files, setFiles] = useState([]);
@@ -8,7 +9,7 @@ export default function PhotoUploadWidget({ setEditMode }) {
     <Grid>
       <Grid.Column width={4}>
         <Header color='teal' sub content='Step 1 - Add Photo' />
-        PhotoWidgetDropzone
+        <PhotoWidgetDropzone setFiles={setFiles} />
       </Grid.Column>
       <Grid.Column width={1} />
       <Grid.Column width={4}>
