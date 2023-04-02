@@ -1,3 +1,4 @@
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { Route, useLocation } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
@@ -40,7 +41,7 @@ export default function App() {
                 key={key}
               />
               <Route path='/account' component={AccountPage} />
-              <Route path='/profile' component={ProfilePage} />
+              <Route path='/profile/:id' component={ProfilePage} />
               <Route path='/error' component={ErrorComponent} />
             </Container>
           </>
