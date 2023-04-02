@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Card, Grid, Header, Image, Tab } from 'semantic-ui-react';
 import PhotoUploadWidget from '../../../app/common/photos/PhotoUploadWidget';
+import { getUserPhotos } from '../../../app/firestore/firestoreService';
+import useFirestoreColection from '../../../app/hooks/useFirestoreCollection';
+import { listenToUserPhotos } from '../profileActions';
 
 export default function PhotosTab({ profile, isCurrentUser }) {
   const dispatch = useDispatch();
@@ -10,6 +13,12 @@ export default function PhotosTab({ profile, isCurrentUser }) {
   const { photos } = useSelector((state) => state.profile);
   const [updating, setUpdating] = useState({ isUpdating: false, target: null });
   const [deleting, setDeleting] = useState({ isDeleting: false, target: null });
+
+  useFirestoreColection({
+    query: () => getUserPhotos(profile.id),
+    data: (photos) => dispatch(listenToUserPhotos(photos)),
+    deps: [profile.id, dispatch],
+  });
 
   return (
     <Tab.Pane loading={loading}>
