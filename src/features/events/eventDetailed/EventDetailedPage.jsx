@@ -1,3 +1,4 @@
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { Grid } from 'semantic-ui-react';
@@ -12,10 +13,13 @@ import EventDetailedSidebar from './EventDetailedSidebar';
 
 export default function EventDetailedPage({ match }) {
   const dispatch = useDispatch();
+  const { currentUser } = useSelector((state) => state.auth);
   const event = useSelector((state) =>
     state.event.events.find((e) => e.id === match.params.id)
   );
   const { loading, error } = useSelector((state) => state.async);
+  const isHost = event?.hostUid === currentUser.uid;
+  const isGoing = event?.attendees?.some((a) => a.id === currentUser.uid);
 
   useFirestoreDoc({
     query: () => listenToEventFromFirestore(match.params.id),
@@ -31,7 +35,7 @@ export default function EventDetailedPage({ match }) {
   return (
     <Grid>
       <Grid.Column width={10}>
-        <EventDetailedHeader event={event} />
+        <EventDetailedHeader event={event} isGoing={isGoing} isHost={isHost} />
         <EventDetailedInfo event={event} />
         <EventDetailedChat />
       </Grid.Column>
