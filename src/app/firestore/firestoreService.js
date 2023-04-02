@@ -227,3 +227,25 @@ export async function followUser(profile) {
     throw error;
   }
 }
+
+export async function unfollowUser(profile) {
+  const user = firebase.auth().currentUser;
+  const batch = db.batch();
+  try {
+    batch.delete(
+      db
+        .collection('following')
+        .doc(user.uid)
+        .collection('userFollowing')
+        .doc(profile.id)
+    );
+
+    batch.update(db.collection('users').doc(user.uid), {
+      followingCount: firebase.firestore.FieldValue.increment(-1),
+    });
+
+    return await batch.commit();
+  } catch (error) {
+    throw error;
+  }
+}
