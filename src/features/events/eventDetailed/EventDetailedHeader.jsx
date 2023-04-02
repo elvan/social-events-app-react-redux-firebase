@@ -1,7 +1,9 @@
 import { format } from 'date-fns';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { Button, Header, Image, Item, Segment } from 'semantic-ui-react';
+import { addUserAttendance } from '../../../app/firestore/firestoreService';
 
 const eventImageStyle = {
   filter: 'brightness(30%)',
@@ -18,6 +20,17 @@ const eventImageTextStyle = {
 
 export default function EventDetailedHeader({ event, isHost, isGoing }) {
   const [loading, setLoading] = useState(false);
+
+  async function handleUserJoinEvent() {
+    setLoading(true);
+    try {
+      await addUserAttendance(event);
+    } catch (error) {
+      toast.error(error.message);
+    } finally {
+      setLoading(false);
+    }
+  }
 
   return (
     <Segment.Group>
@@ -58,7 +71,11 @@ export default function EventDetailedHeader({ event, isHost, isGoing }) {
             {isGoing ? (
               <Button loading={loading}>Cancel My Place</Button>
             ) : (
-              <Button loading={loading} color='teal'>
+              <Button
+                onClick={handleUserJoinEvent}
+                loading={loading}
+                color='teal'
+              >
                 JOIN THIS EVENT
               </Button>
             )}
