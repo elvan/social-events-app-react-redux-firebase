@@ -1,7 +1,10 @@
 {
   "compilerOptions": {
+    "checkJs": false,
+    "jsx": "react",
     "module": "UMD",
-    "target": "es6"
+    "moduleResolution": "nodenext",
+    "target": "es6",
   },
   "include": [
     "src/**/*"
