@@ -6,12 +6,13 @@ import MyTextInput from '../../app/common/form/MyTextInput';
 import ModalWrapper from '../../app/common/modals/ModalWrapper';
 import { closeModal } from '../../app/common/modals/modalReducer';
 import { signInWithEmail } from '../../app/firestore/firebaseService';
+import SocialLogin from './SocialLogin';
 
 export default function LoginForm() {
   const dispatch = useDispatch();
 
   return (
-    <ModalWrapper size='mini' header='Sign in to SocialEvents'>
+    <ModalWrapper size='mini' header='Sign in to Re-vents'>
       <Formik
         initialValues={{ email: '', password: '' }}
         validationSchema={Yup.object({
@@ -55,6 +56,7 @@ export default function LoginForm() {
               content='Login'
             />
             <Divider horizontal>Or</Divider>
+            <SocialLogin />
           </Form>
         )}
       </Formik>
