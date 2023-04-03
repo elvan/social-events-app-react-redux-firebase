@@ -33,7 +33,7 @@
     "connected-react-router": "^6.9.3",
     "cuid": "^3.0.0",
     "date-fns": "^2.29.3",
-    "firebase": "^7.24.0",
+    "firebase": "^9.19.1",
     "formik": "^2.2.9",
     "google-map-react": "^1.1.7",
     "history": "^4.10.1",
