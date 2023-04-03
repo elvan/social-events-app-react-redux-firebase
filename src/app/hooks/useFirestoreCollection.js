@@ -1,3 +1,4 @@
+import { onSnapshot } from '@firebase/firestore';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import {
@@ -12,7 +13,8 @@ export default function useFirestoreCollection({ query, data, deps }) {
 
   useEffect(() => {
     dispatch(asyncActionStart());
-    const unsubscribe = query().onSnapshot(
+    const unsubscribe = onSnapshot(
+      query(),
       (snapshot) => {
         const docs = snapshot.docs.map((doc) => dataFromSnapshot(doc));
         data(docs);

@@ -1,3 +1,4 @@
+import { onSnapshot } from '@firebase/firestore';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import {
@@ -18,7 +19,8 @@ export default function useFirestoreDoc({
   useEffect(() => {
     if (!shouldExecute) return;
     dispatch(asyncActionStart());
-    const unsubscribe = query().onSnapshot(
+    const unsubscribe = onSnapshot(
+      query(),
       (snapshot) => {
         if (!snapshot.exists) {
           dispatch(

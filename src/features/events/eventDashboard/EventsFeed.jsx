@@ -1,3 +1,4 @@
+import { off, onValue } from '@firebase/database';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Feed, Header, Segment } from 'semantic-ui-react';
@@ -13,7 +14,7 @@ export default function EventsFeed() {
   const { feed } = useSelector((state) => state.profile);
 
   useEffect(() => {
-    getUserFeedRef().on('value', (snapshot) => {
+    onValue(getUserFeedRef(), (snapshot) => {
       if (!snapshot.exists()) {
         return;
       }
@@ -21,7 +22,7 @@ export default function EventsFeed() {
       dispatch(listenToFeed(feed));
     });
     return () => {
-      getUserFeedRef().off();
+      off(getUserFeedRef());
     };
   }, [dispatch]);
 

@@ -1,3 +1,4 @@
+import { off, onValue } from '@firebase/database';
 import { formatDistance } from 'date-fns';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -26,7 +27,7 @@ export default function EventDetailedChat({ eventId }) {
   }
 
   useEffect(() => {
-    getEventChatRef(eventId).on('value', (snapshot) => {
+    onValue(getEventChatRef(eventId), (snapshot) => {
       if (!snapshot.exists()) return;
       dispatch(
         listenToEventChat(firebaseObjectToArray(snapshot.val()).reverse())
@@ -34,7 +35,7 @@ export default function EventDetailedChat({ eventId }) {
     });
     return () => {
       dispatch({ type: CLEAR_COMMENTS });
-      getEventChatRef().off();
+      off(getEventChatRef());
     };
   }, [eventId, dispatch]);
 
