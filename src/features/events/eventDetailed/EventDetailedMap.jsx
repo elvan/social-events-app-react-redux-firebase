@@ -1,4 +1,5 @@
 import GoogleMapReact from 'google-map-react';
+import React from 'react';
 import { Icon, Segment } from 'semantic-ui-react';
 
 function Marker() {
@@ -11,7 +12,7 @@ export default function EventDetailedMap({ latLng }) {
     <Segment attached='bottom' style={{ padding: 0 }}>
       <div style={{ height: 300, width: '100%' }}>
         <GoogleMapReact
-          bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_MAPS_API }}
+          bootstrapURLKeys={{ key: process.env.REACT_APP_MAPS_KEY }}
           center={latLng}
           zoom={zoom}
         >
