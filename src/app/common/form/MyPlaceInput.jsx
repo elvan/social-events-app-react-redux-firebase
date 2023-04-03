@@ -1,4 +1,5 @@
 import { useField } from 'formik';
+import React from 'react';
 import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
@@ -56,8 +57,8 @@ export default function MyPlaceInput({ label, options, ...props }) {
               <List selection>
                 {suggestions.map((suggestion) => (
                   <List.Item
-                    key={suggestion.description}
                     {...getSuggestionItemProps(suggestion)}
+                    key={suggestion.placeId}
                   >
                     <List.Header>
                       {suggestion.formattedSuggestion.mainText}

@@ -10,43 +10,46 @@ import PhotoWidgetDropzone from './PhotoWidgetDropzone';
 
 export default function PhotoUploadWidget({ setEditMode }) {
   const [files, setFiles] = useState([]);
-  const [image, setImage] = useState(null);
+  const [cropper, setCropper] = useState(null);
   const [loading, setLoading] = useState(false);
 
   function handleUploadImage() {
     setLoading(true);
     const filename = cuid() + '.' + getFileExtension(files[0].name);
-    const uploadTask = uploadToFirebaseStorage(image, filename);
-    uploadTask.on(
-      'state_changed',
-      (snapshot) => {
-        const progress =
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log('Upload is ' + progress + '% done');
-      },
-      (error) => {
-        toast.error(error.messege);
-      },
-      () => {
-        uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
-          updateUserProfilePhoto(downloadURL, filename)
-            .then(() => {
-              setLoading(false);
-              handleCancelCrop();
-              setEditMode(false);
-            })
-            .catch((error) => {
-              toast.error(error.message);
-              setLoading(false);
-            });
-        });
-      }
-    );
+
+    cropper.getCroppedCanvas().toBlob((image) => {
+      const uploadTask = uploadToFirebaseStorage(image, filename);
+      uploadTask.on(
+        'state_changed',
+        (snapshot) => {
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log('Upload is ' + progress + '% done');
+        },
+        (error) => {
+          toast.error(error.messege);
+        },
+        () => {
+          uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+            updateUserProfilePhoto(downloadURL, filename)
+              .then(() => {
+                setLoading(false);
+                handleCancelCrop();
+                setEditMode(false);
+              })
+              .catch((error) => {
+                toast.error(error.message);
+                setLoading(false);
+              });
+          });
+        }
+      );
+    });
   }
 
   function handleCancelCrop() {
     setFiles([]);
-    setImage(null);
+    setCropper(null);
   }
 
   return (
@@ -60,7 +63,7 @@ export default function PhotoUploadWidget({ setEditMode }) {
         <Header color='teal' sub content='Step 2 - Resize' />
         {files.length > 0 && (
           <PhotoWidgetCropper
-            setImage={setImage}
+            setCropper={setCropper}
             imagePreview={files[0].preview}
           />
         )}
