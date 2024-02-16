@@ -15,6 +15,7 @@ export default function NavBar() {
           SocialEvents
         </MenuItem>
         <MenuItem name='Events' as={NavLink} to='/events' />
+        <MenuItem name='Scratch' as={NavLink} to='/scratch' />
         <MenuItem>
           <Button
             as={NavLink}
