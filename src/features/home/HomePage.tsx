@@ -7,7 +7,7 @@ export default function HomePage() {
       <Container>
         <Header as='h1' inverted>
           <Image size='massive' src='/logo.png' alt='logo' style={{ marginBottom: 12 }} />
-          Re-vents
+          SocialEvents
         </Header>
         <Button size='huge' inverted as={Link} to='/events'>
           Get started
