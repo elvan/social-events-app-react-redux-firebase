@@ -21,12 +21,12 @@ export default function LoginForm() {
   }
 
   return (
-    <ModalWrapper header='Sign into SocialEvents'>
+    <ModalWrapper header='Sign into re-vents'>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Form.Input
           defaultValue=''
           placeholder='Email address'
-          {...register('email', { required: true, pattern: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/ })}
+          {...register('email', { required: true, pattern: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/ })}
           error={
             (errors.email?.type === 'required' && 'Email is required') ||
             (errors.email?.type === 'pattern' && 'Email is invalid')
