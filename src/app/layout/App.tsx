@@ -1,6 +1,6 @@
 import { onAuthStateChanged } from 'firebase/auth';
 import { useEffect } from 'react';
-import { Outlet, useLocation } from 'react-router-dom';
+import { Outlet, ScrollRestoration, useLocation } from 'react-router-dom';
 import { Container } from 'semantic-ui-react';
 import { logout, signIn } from '../../features/auth/authSlice';
 import HomePage from '../../features/home/HomePage';
@@ -33,6 +33,7 @@ function App() {
         <HomePage />
       ) : (
         <>
+          <ScrollRestoration />
           <ModalManager />
           <NavBar />
           <Container className='main'>
