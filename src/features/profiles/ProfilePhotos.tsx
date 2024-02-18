@@ -3,6 +3,7 @@ import { deleteObject, ref } from 'firebase/storage';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { Button, Card, Grid, Header, Image, TabPane } from 'semantic-ui-react';
+import { batchSetPhoto } from '../../app/actions/firestoreActions';
 import { auth, storage } from '../../app/config/firebase';
 import { useFireStore } from '../../app/hooks/firestore/useFirestore';
 import { useAppSelector } from '../../app/store/store';
@@ -19,16 +20,13 @@ export default function ProfilePhotos({ profile }: Props) {
   const isCurrentUser = auth.currentUser?.uid === profile.id;
   const { data: photos, status } = useAppSelector((state) => state.photos);
   const { loadCollection, remove } = useFireStore(`profiles/${profile.id}/photos`);
-  const { update } = useFireStore('profiles');
 
   useEffect(() => {
     loadCollection(actions);
   }, [loadCollection]);
 
   async function handleSetMain(photo: Photo) {
-    await update(profile.id, {
-      photoURL: photo.url,
-    });
+    await batchSetPhoto(photo.url);
     await updateProfile(auth.currentUser!, {
       photoURL: photo.url,
     });
