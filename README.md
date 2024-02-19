@@ -1,5 +1,51 @@
 # SocialEvents
 
+![Screenshot](https://raw.githubusercontent.com/elvan/social-events-app-react-redux-firebase/main/_screenshots_/Screenshot%202024-02-19%20230738.png)
+
+---
+
+![Screenshot](https://raw.githubusercontent.com/elvan/social-events-app-react-redux-firebase/main/_screenshots_/Screenshot%202024-02-19%20230815.png)
+
+---
+
+![Screenshot](https://raw.githubusercontent.com/elvan/social-events-app-react-redux-firebase/main/_screenshots_/Screenshot%202024-02-19%20230849.png)
+
+---
+
+![Screenshot](https://raw.githubusercontent.com/elvan/social-events-app-react-redux-firebase/main/_screenshots_/Screenshot%202024-02-19%20230950.png)
+
+---
+
+![Screenshot](https://raw.githubusercontent.com/elvan/social-events-app-react-redux-firebase/main/_screenshots_/Screenshot%202024-02-19%20231005.png)
+
+---
+
+![Screenshot](https://raw.githubusercontent.com/elvan/social-events-app-react-redux-firebase/main/_screenshots_/Screenshot%202024-02-19%20231017.png)
+
+---
+
+![Screenshot](https://raw.githubusercontent.com/elvan/social-events-app-react-redux-firebase/main/_screenshots_/Screenshot%202024-02-19%20231051.png)
+
+---
+
+![Screenshot](https://raw.githubusercontent.com/elvan/social-events-app-react-redux-firebase/main/_screenshots_/Screenshot%202024-02-19%20231101.png)
+
+---
+
+![Screenshot](https://raw.githubusercontent.com/elvan/social-events-app-react-redux-firebase/main/_screenshots_/Screenshot%202024-02-19%20231111.png)
+
+---
+
+![Screenshot](https://raw.githubusercontent.com/elvan/social-events-app-react-redux-firebase/main/_screenshots_/Screenshot%202024-02-19%20231121.png)
+
+---
+
+![Screenshot](https://raw.githubusercontent.com/elvan/social-events-app-react-redux-firebase/main/_screenshots_/Screenshot%202024-02-19%20231154.png)
+
+---
+
+![Screenshot](https://raw.githubusercontent.com/elvan/social-events-app-react-redux-firebase/main/_screenshots_/Screenshot%202024-02-19%20231206.png)
+
 ## Description
 
 SocialEvents is a comprehensive event management application designed to enhance user engagement through real-time interaction and comprehensive event details. It streamlines the process of creating, attending, and managing events with integrated Google Maps, live chat, and social features. SocialEvents solves the problem of fragmented event planning and participation by providing a unified platform for users to connect, share, and engage with events in their community.
