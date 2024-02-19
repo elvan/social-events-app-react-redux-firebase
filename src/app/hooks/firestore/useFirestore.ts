@@ -52,6 +52,7 @@ export const useFireStore = <T extends DocumentData>(path: string) => {
       if (options?.reset) {
         lastDocRef.current = null;
         hasMore.current = true;
+        dispatch(actions.reset());
       }
 
       dispatch(actions.loading());
@@ -116,14 +117,9 @@ export const useFireStore = <T extends DocumentData>(path: string) => {
   );
 
   const create = async (data: T) => {
-    try {
-      const ref = doc(collection(db, path));
-      await setDoc(ref, data);
-      return ref;
-    } catch (error: any) {
-      console.log(error);
-      toast.error(error.message);
-    }
+    const ref = doc(collection(db, path));
+    await setDoc(ref, data);
+    return ref;
   };
 
   const update = async (id: string, data: T) => {

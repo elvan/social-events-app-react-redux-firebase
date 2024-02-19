@@ -1,4 +1,5 @@
 import { initializeApp } from 'firebase/app';
+import { ReCaptchaV3Provider, initializeAppCheck } from 'firebase/app-check';
 import 'firebase/auth';
 import { getAuth } from 'firebase/auth';
 import 'firebase/database';
@@ -7,6 +8,11 @@ import 'firebase/firestore';
 import { getFirestore } from 'firebase/firestore';
 import 'firebase/storage';
 import { getStorage } from 'firebase/storage';
+
+declare global {
+  // eslint-disable-next-line no-var
+  var FIREBASE_APPCHECK_DEBUG_TOKEN: boolean | string | undefined;
+}
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -19,8 +25,17 @@ const firebaseConfig = {
   appId: '',
 };
 
+if (import.meta.env.DEV) {
+  self.FIREBASE_APPCHECK_DEBUG_TOKEN = true;
+}
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+
+initializeAppCheck(app, {
+  provider: new ReCaptchaV3Provider(''),
+  isTokenAutoRefreshEnabled: true,
+});
 
 export const db = getFirestore(app);
 export const auth = getAuth(app);

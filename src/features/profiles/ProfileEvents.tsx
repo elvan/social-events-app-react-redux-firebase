@@ -1,7 +1,7 @@
 import { format } from 'date-fns';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Card, Grid, Header, Image, Tab, TabPane } from 'semantic-ui-react';
+import { Card, Grid, Header, Image, Tab } from 'semantic-ui-react';
 import { CollectionOptions } from '../../app/hooks/firestore/types';
 import { useFireStore } from '../../app/hooks/firestore/useFirestore';
 import { useAppSelector } from '../../app/store/store';
@@ -27,6 +27,7 @@ export default function ProfileEvents({ profile }: Props) {
       { attribute: 'date', operator: '>=', value: new Date() },
     ],
     sort: { attribute: 'date', order: 'asc' },
+    reset: true,
   };
 
   const [options, setOptions] = useState<CollectionOptions>(initialOptions);
@@ -40,13 +41,16 @@ export default function ProfileEvents({ profile }: Props) {
           { attribute: 'date', operator: '<', value: new Date() },
         ]),
           (options.sort = { attribute: 'date', order: 'desc' });
+        options.reset = true;
         break;
       case 2: // hosted
         (options.queries = [{ attribute: 'hostUid', operator: '==', value: profile.id }]),
           (options.sort = { attribute: 'date', order: 'asc' });
+        options.reset = true;
         break;
       default:
         options = initialOptions;
+        options.reset = true;
         break;
     }
     setOptions(options);
@@ -57,7 +61,7 @@ export default function ProfileEvents({ profile }: Props) {
   }, [loadCollection, options]);
 
   return (
-    <TabPane loading={status === 'loading'}>
+    <Tab.Pane loading={status === 'loading'}>
       <Grid>
         <Grid.Column width={16}>
           <Header floated='left' icon='calendar' content='events' />
@@ -86,6 +90,6 @@ export default function ProfileEvents({ profile }: Props) {
           </Card.Group>
         </Grid.Column>
       </Grid>
-    </TabPane>
+    </Tab.Pane>
   );
 }

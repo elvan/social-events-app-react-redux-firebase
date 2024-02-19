@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { Grid } from 'semantic-ui-react';
 import { QueryOptions } from '../../../app/hooks/firestore/types';
 import { useFireStore } from '../../../app/hooks/firestore/useFirestore';
+import EmptyState from '../../../app/layout/EmptyState';
 import { useAppDispatch, useAppSelector } from '../../../app/store/store';
 import { actions } from '../eventSlice';
 import EventFilters from './EventFilters';
@@ -52,12 +53,16 @@ export default function EventDashboard() {
           </>
         ) : (
           <>
-            <EventList
-              events={events}
-              hasMore={hasMore.current}
-              loadMore={loadMore}
-              loading={status === 'loading'}
-            />
+            {events.length === 0 ? (
+              <EmptyState />
+            ) : (
+              <EventList
+                events={events}
+                hasMore={hasMore.current}
+                loadMore={loadMore}
+                loading={status === 'loading'}
+              />
+            )}
           </>
         )}
       </Grid.Column>
