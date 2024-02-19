@@ -5,6 +5,7 @@ import EventDetailedPage from '../../features/events/details/EventDetailedPage';
 import EventForm from '../../features/events/form/EventForm';
 import ProfilePage from '../../features/profiles/ProfilePage';
 import Scratch from '../../features/scratch/Scratch';
+import MapsWrapper from '../common/maps/MapsWrapper';
 import App from '../layout/App';
 import UnauthComponent from '../layout/UnauthComponent';
 import RequireAuth from './RequireAuth';
@@ -25,7 +26,14 @@ export const router = createBrowserRouter([
       },
       { path: '/events', element: <EventDashboard /> },
       { path: '/events/:id', element: <EventDetailedPage /> },
-      { path: '/scratch', element: <Scratch /> },
+      {
+        path: '/scratch',
+        element: (
+          <MapsWrapper>
+            <Scratch />
+          </MapsWrapper>
+        ),
+      },
       { path: '/unauthorised', element: <UnauthComponent /> },
     ],
   },

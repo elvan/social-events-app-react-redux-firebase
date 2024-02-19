@@ -1,7 +1,7 @@
 import { format } from 'date-fns';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Card, Grid, Header, Image, Tab } from 'semantic-ui-react';
+import { Card, Grid, Header, Image, Tab, TabPane } from 'semantic-ui-react';
 import { CollectionOptions } from '../../app/hooks/firestore/types';
 import { useFireStore } from '../../app/hooks/firestore/useFirestore';
 import { useAppSelector } from '../../app/store/store';
@@ -61,7 +61,7 @@ export default function ProfileEvents({ profile }: Props) {
   }, [loadCollection, options]);
 
   return (
-    <Tab.Pane loading={status === 'loading'}>
+    <TabPane loading={status === 'loading'}>
       <Grid>
         <Grid.Column width={16}>
           <Header floated='left' icon='calendar' content='events' />
@@ -90,6 +90,6 @@ export default function ProfileEvents({ profile }: Props) {
           </Card.Group>
         </Grid.Column>
       </Grid>
-    </Tab.Pane>
+    </TabPane>
   );
 }
