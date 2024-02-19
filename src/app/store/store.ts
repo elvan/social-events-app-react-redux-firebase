@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import { authSlice } from '../../features/auth/authSlice';
+import { feedSlice } from '../../features/events/dashboard/feedSlice';
 import { eventSlice } from '../../features/events/eventSlice';
 import { followSlice } from '../../features/profiles/follow/followSlice';
 import { photoSlice } from '../../features/profiles/photosSlice';
@@ -17,6 +18,7 @@ export const store = configureStore({
     profiles: profileSlice.reducer,
     photos: photoSlice.reducer,
     follows: followSlice.reducer,
+    feed: feedSlice.reducer,
   },
 });
 

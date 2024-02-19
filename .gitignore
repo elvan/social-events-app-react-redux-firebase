@@ -26,5 +26,6 @@ dist-ssr
 ###
 
 .env
+.firebaserc
 package-lock.json
 src/app/config/firebase.ts

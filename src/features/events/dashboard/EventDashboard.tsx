@@ -8,9 +8,11 @@ import { actions } from '../eventSlice';
 import EventFilters from './EventFilters';
 import EventList from './EventList';
 import EventListItemPlaceholder from './EventListItemPlaceholder';
+import NewsFeed from './NewsFeed';
 
 export default function EventDashboard() {
   const dispatch = useAppDispatch();
+  const { authenticated } = useAppSelector((state) => state.auth);
   const { data: events, status, loadedInitial } = useAppSelector((state) => state.events);
   const { loadCollection, hasMore } = useFireStore('events');
   const [query, setQuery] = useState<QueryOptions[]>([
@@ -68,6 +70,7 @@ export default function EventDashboard() {
       </Grid.Column>
       <Grid.Column width={6}>
         <div className='ui fixed top sticky' style={{ top: 98, width: 405, zIndex: 1 }}>
+          {authenticated && <NewsFeed />}
           <EventFilters setQuery={setQuery} />
         </div>
       </Grid.Column>
